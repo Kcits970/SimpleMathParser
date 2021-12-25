@@ -44,7 +44,7 @@ int getSelectionIndex() {
 	printFormattedTitle("EXPRESSION SELECTION PROMPT");
 	printExpressionList();
 
-	return getNumberInput("SELECT AN EXPRESSION : ", 1, expressionList->size) - 1;
+	return getNumberInput("SELECT AN EXPRESSION: ", 1, expressionList->size) - 1;
 }
 
 void promptVariableEdit() {
