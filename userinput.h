@@ -23,11 +23,14 @@ char getCharacterInput(const char* promptMessage) {
 	return defaultBuffer[0];
 }
 
-double getNumberInput(const char* promptMessage) {
+int getNumberInput(const char* promptMessage, int lowerBound, int upperBound) {
 	getInputInDefaultBuffer(promptMessage);
 
-	double number = atof(defaultBuffer);
-	return number;
+	int number = atoi(defaultBuffer);
+	if (number >= lowerBound && number <= upperBound)
+		return number;
+	else
+		return lowerBound;
 }
 
 #endif
