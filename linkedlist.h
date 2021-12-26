@@ -65,21 +65,6 @@ void* getValueAt(LINKED_LIST* list, int index) {
 		return NULL;
 }
 
-void appendToList(LINKED_LIST* list, void* value, void(*del)(void*)) {
-	//new values are appended at the start of the given list.
-	//function pointer del is needed in case the list exceeds the specified max size.
-	if (list->size == MAX_LIST_SIZE)
-		removeNodeAt(list, list->size - 1, del);
-
-	LIST_NODE* currentNode = createNewNode(value);
-	LIST_NODE* previousNode = list->header;
-
-	list->header = currentNode;
-	currentNode->next = previousNode;
-
-	(list->size)++;
-}
-
 bool removeHeaderNode(LINKED_LIST* list, void (*del)(void*)) {
 	if (list->header == NULL) return false;
 
@@ -109,6 +94,21 @@ bool removeNodeAt(LINKED_LIST* list, int index, void (*del)(void*)) {
 
 void clearList(LINKED_LIST* list, void (*del)(void*)) {
 	while (removeHeaderNode(list, del));
+}
+
+void appendToList(LINKED_LIST* list, void* value, void(*del)(void*)) {
+	//new values are appended at the start of the given list.
+	//function pointer del is needed in case the list exceeds the specified max size.
+	if (list->size == MAX_LIST_SIZE)
+		removeNodeAt(list, list->size - 1, del);
+
+	LIST_NODE* currentNode = createNewNode(value);
+	LIST_NODE* previousNode = list->header;
+
+	list->header = currentNode;
+	currentNode->next = previousNode;
+
+	(list->size)++;
 }
 
 #endif
